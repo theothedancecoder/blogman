@@ -13,15 +13,15 @@ const client = new MongoClient(process.env.ATLAS_URI, {
 
 let database
 
-module.exports = {
-    connectToServer :() =>{
-        database =client.db("blogman")
-    },
-    getDb: ()=>{
-        return database
-    }
+module.exports ={
+  connectToServer: () =>{
+    database = client.db("BlogData")
+  },
+  getDb: () =>{
+    return database
+  }
 }
-console.log("hi")
+
 /*async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
