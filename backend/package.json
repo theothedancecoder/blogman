@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mangodb": "^1.0.0"
+  }
+}
