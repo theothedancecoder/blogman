@@ -6,7 +6,7 @@ const URL ="http://localhost:3000"
 //This line gets all our posts
 export async function getPosts(){
     const response = await axios.get(`${URL}/posts`)
-    if (response.status == 200){
+    if (response.status === 200){
         return response.data
     } else {return "no data here"}
 }
@@ -21,7 +21,7 @@ export async function getPost(id){
 
 
 export async function createPost(post){
-    const response = await axios.post(`${URL}/posts`/post)
+    const response = await axios.post(`${URL}/posts`,post)
     return response
 
 }
