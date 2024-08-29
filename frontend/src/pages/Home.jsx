@@ -9,6 +9,7 @@ export function Home(){
     useEffect(()=>{
         async function loadAllPosts(){
             const data = await getPosts()
+            data.sort((d1,d2)=>new Date(d2.dateCreated))
             setPosts(data)
 
         }
@@ -17,7 +18,7 @@ export function Home(){
     },[])
 
     return(
-        <>{posts.map((post)=>{
+        <div className="posts">{posts.map((post)=>{
             return(
                 <>
              
@@ -27,6 +28,6 @@ export function Home(){
 
 
             )
-        })}</>
+        })}</div>
     )
 }
