@@ -1,6 +1,7 @@
 
 import { getPosts } from "../api"
 import { useState, useEffect } from "react"
+import { BlogCard } from "../../components/BlogCard"
 
 export function Home(){
 
@@ -19,10 +20,8 @@ export function Home(){
         <>{posts.map((post)=>{
             return(
                 <>
-               <h1>{post.title}</h1>
-               <h1>{post.description}</h1>
-               <h1>{post.dateCreated}</h1>
-               
+             
+               <BlogCard post={post}/>f
 
                 </>
 
