@@ -27,6 +27,7 @@ export function Login(){
        let response = await verifyUser(user)
        if (response){
         navigate("/home")
+        sessionStorage.setItem("user", response)
        } else{ 
         alert("login failed")
     }
