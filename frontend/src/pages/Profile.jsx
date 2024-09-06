@@ -1,6 +1,6 @@
 import { BlogCard } from "../../components/BlogCard"
 import { useState, useEffect } from "react"
-import {getPosts } from "../api"
+import { getPosts } from "../api"
 import * as jwt_decode from 'jwt-decode'
 
 
@@ -30,6 +30,11 @@ export function Profile (){
        <h2>{user.email}</h2>
        <label> Join Date: </label>
        <h2>{user.joinDate}</h2>
+       {post.map((post)=>{
+        return(
+            <BlogCard post ={post}/>
+        )
+       })}
         </>
     )
 }

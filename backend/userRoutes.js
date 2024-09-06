@@ -21,7 +21,7 @@ userRoutes.route("/users").get(async (request,response)=>{
     }else{throw new Error("Data was not found")}
 })
 //retrieve one
-http://localhost:3000/users/1234
+//http://localhost:3000/users/1234
 userRoutes.route("/users/:id").get(async (request,response)=>{
     let db = database.getDb()
     let data = await db.collection("users").findOne({_id:new ObjectId(request.params.id) })

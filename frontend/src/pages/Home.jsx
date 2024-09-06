@@ -22,7 +22,7 @@ export function Home(){
             return(
                 <>
              
-               <BlogCard post={post}/>f
+               <BlogCard key={post.id} post={post}/>
 
                 </>
 

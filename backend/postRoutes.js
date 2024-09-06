@@ -17,7 +17,7 @@ postRoutes.route("/posts").get(verifyToken, async (request,response)=>{
     }else{throw new Error("Data was not found")}
 })
 //retrieve one
-http://localhost:3000/posts/1234
+//http://localhost:3000/posts/1234
 postRoutes.route("/posts/:id").get(verifyToken, async (request,response)=>{
     let db = database.getDb()
     let data = await db.collection("posts").findOne({_id:new ObjectId(request.params.id) })
@@ -27,17 +27,40 @@ postRoutes.route("/posts/:id").get(verifyToken, async (request,response)=>{
     }else{throw new Error("Data was not found")}
 })
 //create one
-postRoutes.route("/posts/").post(verifyToken, async (request,response)=>{
+postRoutes.route("/posts/").post(verifyToken, async (request,response, next)=>{
     let db = database.getDb()
+
+    // Validate incoming data
+    if (!request.body.title || !request.body.description || !request.body.content) {
+        return response.status(400).json({ message: "Title, description, and content are required." });
+      }
+  
+      //if (!request.body.imageId) {
+      //  return response.status(400).json({ message: "imageId is required." });
+     // }
+  
+      // Log the incoming data to check if it's correctly received
+      console.log("Request Body:", request.body);
+
     let mongoObject ={
         title: request.body.title,
         description: request.body.description,
         content: request.body.content,
         author: request.body.user._id,
-        dateCreated: request.body.dateCreated
+        dateCreated: request.body.dateCreated,
+        imageId: request.body.imageId
     }
-    let data = await db.collection("posts").insertOne(mongoObject)
-    response.json(data)
+    
+    const result = await db.collection("posts").insertOne(mongoObject)
+    console.log("postresult", result)
+    return response.status(201).json({message:"success"})
+    
+
+    
+   // if (!mongoObject.imageId){
+   //     return response.status(400).json({message:"imageId is required"})
+  //  }
+    
 })
     
 //update one
@@ -49,7 +72,8 @@ postRoutes.route("/posts/:id").put(verifyToken, async (request,response)=>{
         description: request.body.description,
         content: request.body.content,
         author: request.body.author,
-        dateCreated: request.body.dateCreated
+        dateCreated: request.body.dateCreated,
+        imageId: request.body.imageId
     }}
     let data = await db.collection("posts").updateOne(mongoObject)
     response.json(data)
