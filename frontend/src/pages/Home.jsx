@@ -18,13 +18,13 @@ export function Home(){
     },[])
 
     return(
-        <div className="posts">{posts.map((post)=>{
+        <div className="flex flex-col items-center w-full">{posts.map((post)=>{
             return(
-                <>
+                <div className="w-1/2 mt-4">
              
                <BlogCard key={post.id} post={post}/>
 
-                </>
+                </div>
 
 
             )

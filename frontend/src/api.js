@@ -1,4 +1,5 @@
 import axios from "axios";
+import './index.css'
 
 const URL = "http://localhost:3000"
 

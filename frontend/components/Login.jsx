@@ -2,6 +2,9 @@ import { verifyUser } from "../src/api"
 import { useState } from "react"
 import { useNavigate} from "react-router-dom"
 import axios from "axios"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
 
 export function Login(){
 
@@ -31,7 +34,7 @@ export function Login(){
         axios.defaults.headers.common["Authorization"]= `Bearer ${response}`
         navigate("/home")
     } else{ 
-        alert("login failed")
+        alert("incorrect login credentials. Please check your email and password")
     }
 
 
@@ -40,12 +43,12 @@ export function Login(){
 
 
     return(
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className ="flex flex-col">
             
      
-            <input placeholder={"Email"} onChange={handleChange}name ="email" required maxLength={40}/>
-            <input placeholder={"Password"} onChange={handleChange} name = "password" type="password"required maxLength={40}/>
-            <button type="submit">Login</button>
+            <Input placeholder={"Email"} onChange={handleChange}name ="email" required maxLength={40} className ="mb-2"/>
+            <Input placeholder={"Password"} onChange={handleChange} name = "password" type="password"required maxLength={40} className ="mb-2"/>
+            <Button type="submit" className ="mb-4">Login</Button>
 
         
         

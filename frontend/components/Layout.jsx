@@ -14,14 +14,17 @@ export function Layout(){
         }
 
         
-    }, [user])
+    }, [navigate])
     
 
 
     return(
         <>
         <Navbar/>
+        <main className="flex w-screen justify-center mt-24">
         <Outlet/>
+        </main>
+       
         </>
     )
 }
