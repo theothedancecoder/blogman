@@ -34,7 +34,7 @@ export function Login(){
         axios.defaults.headers.common["Authorization"]= `Bearer ${response}`
         navigate("/home")
     } else{ 
-        alert("incorrect login credentials. Please check your email and password")
+        alert("incorrect login credentials. Please check recheck your email and password")
     }
 
 
