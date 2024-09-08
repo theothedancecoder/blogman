@@ -17,7 +17,11 @@ dist-ssr
 # Environment files
 *.local
 *.env
+
+
+# Ignore environment files
 backend/config.env
+
 
 # Editor directories and files
 .vscode/*
