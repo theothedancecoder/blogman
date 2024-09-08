@@ -13,7 +13,19 @@ const upload = multer()
 const app =express()
 const PORT = 3000
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://blogman-efp6w1i9t-theothecoders-projects.vercel.app', // Your actual Vercel URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
+
+
+
+
+
+
 app.use(express.json())
 app.use(upload.any()) // multer must come before route handlers else it will return undefined.
 app.use(posts)

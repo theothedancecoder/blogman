@@ -33,3 +33,4 @@ backend/config.env
 *.njsproj
 *.sln
 *.sw?
+.vercel
