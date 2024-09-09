@@ -14,9 +14,6 @@ const app =express()
 const PORT = 3000
 
 app.use(cors({
-    origin: 'https://blogman-efp6w1i9t-theothecoders-projects.vercel.app', // Your actual Vercel URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 

@@ -20,7 +20,7 @@ dist-ssr
 
 
 # Ignore environment files
-backend/config.env
+backend/.env
 
 
 # Editor directories and files
