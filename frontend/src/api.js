@@ -1,7 +1,7 @@
 import axios from "axios";
 import './index.css'
 
-const URL = "https://blogman-r24d-mu29md40j-theothecoders-projects.vercel.app"
+const URL = "https://blogman-r24d-1p8o7doz7-theothecoders-projects.vercel.app"
 
 export async function getPosts() {
     //"http://localhost:3000/posts"
