@@ -15,10 +15,7 @@ const PORT = 3000
 
 
 app.use(cors({
-    origin: '*',  // Allows all origins
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed methods
-    allowedHeaders: 'Content-Type, Authorization', // Specify allowed headers
-    credentials: true  // Optional: Allows sending cookies with CORS requests
+   
 }));
 
 
