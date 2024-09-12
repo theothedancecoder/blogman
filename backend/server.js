@@ -29,6 +29,10 @@ app.use(upload.any()) // multer must come before route handlers else it will ret
 app.use(posts)
 app.use(users)
 app.use(awsRoutes)
+// Dummy route for testing
+app.get('/test', (req, res) => {
+    res.json({ message: "Backend is working fine!" });
+});
 
 
 
