@@ -8,17 +8,32 @@ const client = new MongoClient(process.env.ATLAS_URI, {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
-  }
+  },
+  // Limit connection pool to avoid hitting Atlas M0 free tier rate limits
+  maxPoolSize: 10,
+  minPoolSize: 1,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
 });
 
 let database
 
 module.exports ={
-  connectToServer: () =>{
-    database = client.db("BlogData")
+  connectToServer: async () =>{
+    try {
+      await client.connect()
+      database = client.db("BlogData")
+      console.log("Successfully connected to MongoDB Atlas")
+    } catch (err) {
+      console.error("Failed to connect to MongoDB:", err.message)
+      process.exit(1)
+    }
   },
   getDb: () =>{
     return database
+  },
+  closeConnection: async () => {
+    await client.close()
   }
 }
 

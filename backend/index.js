@@ -26,8 +26,8 @@ app.use(upload.any()) // multer must come before route handlers else it will ret
 app.use(posts)
 app.use(users)
 app.use(awsRoutes)
-app.listen(PORT, ()=>{
-    connect.connectToServer()
+app.listen(PORT, async ()=>{
+    await connect.connectToServer()
     console.log(`server is running on port ${PORT}`)
 })
 
