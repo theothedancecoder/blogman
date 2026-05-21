@@ -14,8 +14,15 @@ const client = new MongoClient(process.env.ATLAS_URI, {
 let database
 
 module.exports ={
-  connectToServer: () =>{
-    database = client.db("BlogData")
+  connectToServer: async () =>{
+    try {
+      await client.connect()
+      database = client.db("BlogData")
+      console.log("Successfully connected to MongoDB Atlas!")
+    } catch (err) {
+      console.error("Failed to connect to MongoDB:", err.message)
+      process.exit(1)
+    }
   },
   getDb: () =>{
     return database

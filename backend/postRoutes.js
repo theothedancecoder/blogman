@@ -75,7 +75,7 @@ postRoutes.route("/posts/:id").put(verifyToken, async (request,response)=>{
         dateCreated: request.body.dateCreated,
         imageId: request.body.imageId
     }}
-    let data = await db.collection("posts").updateOne(mongoObject)
+    let data = await db.collection("posts").updateOne({_id: new ObjectId(request.params.id)}, mongoObject)
     response.json(data)
 })
 

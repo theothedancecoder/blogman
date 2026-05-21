@@ -10,6 +10,25 @@ require("dotenv").config({path:"./.env"})
 
 let userRoutes =express.Router()
 const SALT_ROUNDS = 6
+
+//login route — must be defined BEFORE /users/:id to avoid route shadowing
+userRoutes.route("/users/login").post(async (request,response)=>{
+    let db = database.getDb()
+
+    const user =await db.collection("users").findOne({email:request.body.email})
+      if (user){
+        let confirmation = await bcrypt.compare(request.body.password, user.password)
+            if (confirmation){
+                const token =jwt.sign(user, process.env.SECRETKEY,{expiresIn: "1h"})
+                response.json({success: true, token})
+            }else{
+                response.json({success:false, message: "incorrect password"})
+            }
+      }else {
+        response.json({success:false, message:"user not found"})
+      }
+})
+
 //retrieve / read all
 //http://localhost:3000/users
 userRoutes.route("/users").get(async (request,response)=>{
@@ -66,7 +85,7 @@ userRoutes.route("/users/:id").put(async (request,response)=>{
             joinDate: request.body.joinDate,
             posts: request.body.posts // you do this so it doesnt wipe the posts of the user
     }}
-    let data = await db.collection("users").updateOne(mongoObject)
+    let data = await db.collection("users").updateOne({_id: new ObjectId(request.params.id)}, mongoObject)
     response.json(data)
 })
 
@@ -80,23 +99,4 @@ userRoutes.route("/users/:id").delete(async (request,response)=>{
 })
 
 
-//login route
-userRoutes.route("/users/login").post(async (request,response)=>{
-    let db = database.getDb()
-
-    const user =await db.collection("users").findOne({email:request.body.email})
-      if (user){
-        let confirmation = await bcrypt.compare(request.body.password, user.password)
-            if (confirmation){
-                const token =jwt.sign(user, process.env.SECRETKEY,{expiresIn: "1h"})
-                response.json({success: true, token})
-            }else{
-                response.json({success:false, message: "incorrect password"})
-            }
-      }else {
-        response.json({success:false, message:"user not found"})
-      }
-   
-    
-})
 module.exports =userRoutes

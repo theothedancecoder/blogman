@@ -36,7 +36,7 @@ app.get('/test', (req, res) => {
 
 
 
-app.listen(PORT, ()=>{
-    connect.connectToServer()
+app.listen(PORT, async ()=>{
+    await connect.connectToServer()
     console.log(`server is running on port ${PORT}`)
 })
